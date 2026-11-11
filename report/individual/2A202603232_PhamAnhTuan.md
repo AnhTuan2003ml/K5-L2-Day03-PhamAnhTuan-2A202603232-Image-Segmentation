@@ -34,13 +34,13 @@ Tôi đối chiếu ba tier với reference `tiers_gt` được cung cấp, dùn
 
 ## 2. Một quyết định trước khi dùng gợi ý
 
-Tôi chưa xác định được object đầu tiên đã tự vẽ ở Medium và chưa có thông tin để ghi lại việc sử dụng gợi ý. File export không lưu thứ tự vẽ, nên tôi chưa thể mô tả chính xác quyết định chọn biên của object đó.
+Ở ảnh đầu tiên của Medium, tôi chọn một người ở khu vực trung tâm và gán class `person`. Với instance, tôi cần vẽ theo phần người nhìn thấy và dừng mask tại ranh với nền hoặc vật che. Tôi chưa ghi lại việc có sử dụng gợi ý tự động cho object này hay không.
 
 ## 3. Một lỗi tìm thấy và hướng xử lý
 
 - Task: `medium_instance`, ảnh `000000181542.jpg`.
 - Bằng chứng: export có 68 annotation; reference có 20 object trên cùng ảnh. Trên toàn task, scorer ghi nhận 63 TP, 100 FP và 8 FN ở ngưỡng IoU 0,5; precision 0,39 và recall 0,89. Chênh lệch số lượng cho thấy cần kiểm tra các mask thừa, trùng hoặc tách nhầm; chưa thể kết luận nguyên nhân từng mask chỉ từ số đếm.
-- Hướng xử lý: tôi cần mở lại ảnh trong CVAT, đối chiếu từng object và class, sau đó sửa các mask thừa hoặc gộp/tách sai nếu xác nhận được. Chưa có thông tin xác nhận việc sửa, Save và export lại.
+- Hướng xử lý: tôi cần mở lại ảnh trong CVAT, đối chiếu từng object và class, sau đó sửa các mask thừa hoặc gộp/tách sai nếu xác nhận được. Tôi đã Save và export bài; chưa ghi lại được một mask cụ thể đã sửa và kết quả trước/sau.
 - Kết quả liên quan: mean matched IoU 0,773; metric chấm là 0,686. Precision không trực tiếp nằm trong công thức điểm Medium nên cần xem riêng FP.
 
 ## 4. Ba ca cần kiểm tra hoặc hỏi coach
@@ -48,5 +48,5 @@ Tôi chưa xác định được object đầu tiên đã tự vẽ ở Medium v
 | Ảnh/vị trí | Hai cách hiểu hoặc vấn đề | Quy tắc/chứng cứ | Quyết định hoặc câu hỏi |
 | --- | --- | --- | --- |
 | Easy, vùng `sidewalk` trong ba ảnh | Ranh vỉa hè với `road` hoặc vùng khác có thể chưa khớp | IoU `sidewalk` 0,399; `road` 0,959; coverage 96,8% | Mở các ảnh và kiểm tra theo bó vỉa, chức năng sử dụng; chưa xác định được vị trí lỗi cụ thể từ metric tổng. |
-| Medium, `000000181542.jpg` | Mask dư có thể là vật thật, mask trùng hoặc vật bị tách | 68 annotation so với 20 object reference trên ảnh | Kiểm từng instance và phần nhìn thấy; hỏi coach với object khó phân biệt. |
+| Hình người trên biển quảng cáo, chưa ghi lại tên ảnh | Tôi cân nhắc có nên vẽ mask `person` cho hình người trên biển hay không | Hình người được in trên biển quảng cáo; quy tắc của bài chưa nêu riêng trường hợp này. | Tôi muốn hỏi coach hình in có được tính là instance `person` hay chỉ gán nhãn người trong cảnh. |
 | Hard, hai ảnh của task, vùng `sidewalk` và các instance `person` | Phân lớp hoặc biên vùng vỉa hè; object người có thể bị thừa hoặc bỏ sót | PQ `sidewalk` 0,000 (0 TP, 2 FP, 2 FN); `person` 0,117 (3 TP, 21 FP, 6 FN) | Kiểm ranh, class và từng instance trong CVAT; chưa xác định được vị trí cụ thể hoặc nguyên nhân chỉ từ số liệu tổng. |
