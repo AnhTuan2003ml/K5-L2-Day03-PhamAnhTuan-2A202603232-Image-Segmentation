@@ -5,7 +5,7 @@
 
 ## 1. Bài đã nộp
 
-Chín ZIP đều đọc được và vượt qua kiểm tra cấu trúc bằng `scripts/inspect_submissions.py`. Số ảnh dưới đây là số ảnh trong export, không khẳng định mọi vùng đã được gán nhãn chính xác hay đã hoàn thành QC trực quan.
+Chín ZIP đều đọc được và vượt qua kiểm tra cấu trúc bằng `scripts/inspect_submissions.py`. Số ảnh dưới đây là số ảnh trong export, không khẳng định mọi vùng đã được gán nhãn chính xác hay đã hoàn thành QC trực quan. Số ảnh đã gán nhãn hoàn chỉnh và Save chưa được xác nhận.
 
 | Task | File ZIP | Ảnh trong export | Điểm tối đa |
 | --- | --- | ---: | ---: |
@@ -20,14 +20,14 @@ Chín ZIP đều đọc được và vượt qua kiểm tra cấu trúc bằng `
 | cp6_coverage | `submissions/cp6_coverage.zip` | 1 / 1 | 3 |
 | **Tổng tối đa** | | | **100** |
 
-Đối chiếu ba tier với `tiers_gt` bằng scorer của repo:
+Ngày 12/11/2026, chạy `python scoring/scorecard.py --group tiers --dir submissions` với reference `tiers_gt` được cung cấp để tự đánh giá:
 
 | Task | Metric | Kết quả | Điểm phản hồi |
 | --- | --- | ---: | ---: |
 | easy_semantic | mIoU | 0,791 | 17,4 / 20 |
 | medium_instance | mean matched IoU × recall | 0,686 | 20,3 / 32 |
-| hard_panoptic | PQ | 0,361 | 10,7 / 30 |
-| **Tổng ba tier** | | | **48,4 / 82** |
+| hard_panoptic | PQ | 0,368 | 11,2 / 30 |
+| **Tổng ba tier** | | | **48,9 / 82** |
 
 Đây là điểm tự đánh giá so với reference, không phải điểm cuối. Không có reference riêng cho sáu checkpoint nên chưa tính 18 điểm còn lại. Kiểm tra cấu trúc không chứng minh đúng biên, số vật hay độ phủ; đặc biệt Hard cần kiểm tra chồng lấn và phủ vùng trong CVAT.
 
@@ -48,4 +48,4 @@ ZIP không ghi lại thứ tự vẽ hay việc sử dụng gợi ý. Chưa xác
 | --- | --- | --- | --- |
 | Easy, vùng `sidewalk` trong ba ảnh | Ranh vỉa hè với `road` hoặc vùng khác có thể chưa khớp | IoU `sidewalk` 0,399; `road` 0,959; coverage 96,8% | Mở các ảnh và kiểm tra theo bó vỉa, chức năng sử dụng; chưa xác định được vị trí lỗi cụ thể từ metric tổng. |
 | Medium, `000000181542.jpg` | Mask dư có thể là vật thật, mask trùng hoặc vật bị tách | 68 annotation so với 20 object reference trên ảnh | Kiểm từng instance và phần nhìn thấy; hỏi coach với object khó phân biệt. |
-| Hard, hai ảnh của task, vùng `sidewalk` và các instance `person` | Phân lớp hoặc biên vùng vỉa hè; object người có thể bị thừa hoặc bỏ sót | PQ `sidewalk` 0,000 (0 TP, 2 FP, 2 FN); `person` 0,090 (3 TP, 31 FP, 6 FN) | Kiểm ranh, class và từng instance trong CVAT; chưa xác định được vị trí cụ thể hoặc nguyên nhân chỉ từ số liệu tổng. |
+| Hard, hai ảnh của task, vùng `sidewalk` và các instance `person` | Phân lớp hoặc biên vùng vỉa hè; object người có thể bị thừa hoặc bỏ sót | PQ `sidewalk` 0,000 (0 TP, 2 FP, 2 FN); `person` 0,117 (3 TP, 21 FP, 6 FN) | Kiểm ranh, class và từng instance trong CVAT; chưa xác định được vị trí cụ thể hoặc nguyên nhân chỉ từ số liệu tổng. |
