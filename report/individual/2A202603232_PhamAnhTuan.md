@@ -1,11 +1,12 @@
 # Báo cáo thực hành Day 3
 
-- Học viên: Phạm Anh Tuấn; mã theo tên thư mục bài làm: `2A202603232` (cần xác nhận mã lớp).
-- Ngày và công cụ thực tế đã sử dụng: chưa có thông tin để xác nhận.
+- Họ và tên: Phạm Anh Tuấn
+- Mã học viên: 2A202603232
+- Ngày tự đánh giá: 12/11/2026
 
 ## 1. Bài đã nộp
 
-Chín ZIP đều đọc được và vượt qua kiểm tra cấu trúc bằng `scripts/inspect_submissions.py`. Số ảnh dưới đây là số ảnh trong export, không khẳng định mọi vùng đã được gán nhãn chính xác hay đã hoàn thành QC trực quan. Số ảnh đã gán nhãn hoàn chỉnh và Save chưa được xác nhận.
+Tôi nộp chín file ZIP dưới đây. Khi kiểm tra bằng `scripts/inspect_submissions.py`, các file đều đọc được và đúng cấu trúc yêu cầu. Số ảnh trong bảng là số ảnh có trong bản export; tôi chưa xác nhận số ảnh đã hoàn chỉnh và Save.
 
 | Task | File ZIP | Ảnh trong export | Điểm tối đa |
 | --- | --- | ---: | ---: |
@@ -20,7 +21,7 @@ Chín ZIP đều đọc được và vượt qua kiểm tra cấu trúc bằng `
 | cp6_coverage | `submissions/cp6_coverage.zip` | 1 / 1 | 3 |
 | **Tổng tối đa** | | | **100** |
 
-Ngày 12/11/2026, chạy `python scoring/scorecard.py --group tiers --dir submissions` với reference `tiers_gt` được cung cấp để tự đánh giá:
+Tôi đối chiếu ba tier với reference `tiers_gt` được cung cấp, dùng `python scoring/scorecard.py --group tiers --dir submissions`. Kết quả tự đánh giá ngày 12/11/2026 như sau:
 
 | Task | Metric | Kết quả | Điểm phản hồi |
 | --- | --- | ---: | ---: |
@@ -33,13 +34,13 @@ Ngày 12/11/2026, chạy `python scoring/scorecard.py --group tiers --dir submis
 
 ## 2. Một quyết định trước khi dùng gợi ý
 
-ZIP không ghi lại thứ tự vẽ hay việc sử dụng gợi ý. Chưa xác định được object Medium đầu tiên tự vẽ, quy tắc biên và có dùng gợi ý hay không. Học viên cần bổ sung ảnh, vị trí, class, quyết định biên và thao tác với gợi ý nếu có.
+Tôi chưa xác định được object đầu tiên đã tự vẽ ở Medium và chưa có thông tin để ghi lại việc sử dụng gợi ý. File export không lưu thứ tự vẽ, nên tôi chưa thể mô tả chính xác quyết định chọn biên của object đó.
 
 ## 3. Một lỗi tìm thấy và hướng xử lý
 
 - Task: `medium_instance`, ảnh `000000181542.jpg`.
 - Bằng chứng: export có 68 annotation; reference có 20 object trên cùng ảnh. Trên toàn task, scorer ghi nhận 63 TP, 100 FP và 8 FN ở ngưỡng IoU 0,5; precision 0,39 và recall 0,89. Chênh lệch số lượng cho thấy cần kiểm tra các mask thừa, trùng hoặc tách nhầm; chưa thể kết luận nguyên nhân từng mask chỉ từ số đếm.
-- Hành động đề xuất: mở ảnh trong CVAT, đối chiếu từng object và class, sửa mask thừa hoặc gộp/tách sai nếu xác nhận, sau đó Save và export lại. Chưa có bằng chứng thao tác sửa, Save hoặc export lại; cần học viên xác nhận sau khi thực hiện.
+- Hướng xử lý: tôi cần mở lại ảnh trong CVAT, đối chiếu từng object và class, sau đó sửa các mask thừa hoặc gộp/tách sai nếu xác nhận được. Chưa có thông tin xác nhận việc sửa, Save và export lại.
 - Kết quả liên quan: mean matched IoU 0,773; metric chấm là 0,686. Precision không trực tiếp nằm trong công thức điểm Medium nên cần xem riêng FP.
 
 ## 4. Ba ca cần kiểm tra hoặc hỏi coach
